@@ -2,14 +2,22 @@ package storage;
 
 import model.Credential;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VaultDatabase {
+
     private static final String DB_URL = "jdbc:sqlite:data/securekeyvault.db";
 
     public VaultDatabase() {
+        // Garante que o diretório "data" existe
+        File dataDir = new File("data");
+        if (!dataDir.exists()) {
+            dataDir.mkdirs();
+        }
+
         createTableIfNotExists();
     }
 
